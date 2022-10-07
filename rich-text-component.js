@@ -65,7 +65,7 @@ class RichText extends HTMLElement {
           )}>${next(node.content)}</${tag}>`;
       });
 
-    return renderers;
+    return nodes;
   }
 
   customMarkRenderers() {
