@@ -59,11 +59,10 @@ class RichText extends HTMLElement {
     this.options()
       .filter(({ node, tag }) => Object.values(BLOCKS).includes(node) && !!tag)
       .map(({ node, tag, variant, classNames }) => {
-        renderers[node] = (node, next) => {
-          return `<${tag} ${this.getVariant(variant)} ${this.getClassNames(
+        renderers[node] = (node, next) =>
+          `<${tag} ${this.getVariant(variant)} ${this.getClassNames(
             classNames
           )}>${next(node.content)}</${tag}>`;
-        };
       });
 
     return renderers;
