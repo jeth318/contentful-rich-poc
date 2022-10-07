@@ -1,12 +1,7 @@
 const { documentToHtmlString } = require("@contentful/rich-text-html-renderer");
 const { BLOCKS, MARKS } = require("@contentful/rich-text-types");
 const template = document.createElement("template");
-// Apply external styles to the shadow DOM
-const linkElem = document.createElement("link");
-linkElem.setAttribute("rel", "stylesheet");
-linkElem.setAttribute("href", "style.css");
 
-// Attach the created element to the shadow DOM
 template.innerHTML = `
 <style>
 .green {
