@@ -55,7 +55,7 @@ class RichText extends HTMLElement {
   }
 
   customNodeRenderers() {
-    let renderers = {};
+    let nodes = {};
     this.options()
       .filter(({ node, tag }) => Object.values(BLOCKS).includes(node) && !!tag)
       .map(({ node, tag, variant, classNames }) => {
