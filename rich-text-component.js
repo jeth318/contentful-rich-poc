@@ -4,18 +4,27 @@ const template = document.createElement("template");
 
 template.innerHTML = `
 <style>
-.green {
-  color: green;
-}
+  .green {
+    color: green;
+  }
 
-.orange {
-  color: orange;
-}
+  .orange {
+    color: orange;
+  }
 
-.funny-font {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-}
+  .magenta {
+    color: magenta;
+  }
+
+  .large-font {
+    font-size: 23px;
+  }
+
+  .funny-font {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    font-size: 20px;
+  }
 </style>
 <div id="rich-text-container" class="rich-text"></div>
 `;
@@ -41,23 +50,32 @@ class RichText extends HTMLElement {
   options() {
     return this.getAttribute("options")
       ? JSON.parse(this.getAttribute("options"))
-      : [];
+      : {};
   }
 
+  customNodes() {
+    return this.options().customNodes || []
+      .filter(({ node, tag }) => Object.values(BLOCKS).includes(node) && !!tag)
+  }
+
+  customMarks() {
+    return this.options().customMarks || []
+      .filter(({ mark, tag }) => Object.values(MARKS).includes(mark) && !!tag)
+
+  }
   getVariant(variant) {
     return variant ? `variant="${variant}"` : "";
   }
 
-  getClassNames(classNames) {
-    return classNames && classNames.length
+  getClassNames(classNames = []) {
+    return classNames.length
       ? `class="${classNames.toString()}"`
       : "";
   }
 
-  customNodeRenderers() {
+  nodeRenderers() {
     let nodes = {};
-    this.options()
-      .filter(({ node, tag }) => Object.values(BLOCKS).includes(node) && !!tag)
+    this.customNodes()
       .map(({ node, tag, variant, classNames }) => {
         nodes[node] = (node, next) =>
           `<${tag} ${this.getVariant(variant)} ${this.getClassNames(
@@ -68,10 +86,9 @@ class RichText extends HTMLElement {
     return nodes;
   }
 
-  customMarkRenderers() {
+  markRenderers() {
     let marks = {};
-    this.options()
-      .filter(({ mark, tag }) => Object.values(MARKS).includes(mark) && !!tag)
+    this.customMarks()
       .map(({ mark, tag, variant, classNames }) => {
         marks[mark] = (text) =>
           `<${tag} ${this.getVariant(variant)} ${this.getClassNames(
@@ -83,21 +100,13 @@ class RichText extends HTMLElement {
   }
 
   buildOptions() {
-    const renderMark = this.customMarkRenderers();
-    const renderNode = this.customNodeRenderers();
-    console.log(
-      renderMark || renderNode
-        ? {
-            ...(renderMark && { renderMark }),
-            ...(renderNode && { renderNode }),
-          }
-        : undefined
-    );
+    const renderMark = this.markRenderers();
+    const renderNode = this.nodeRenderers();
     return renderMark || renderNode
       ? {
-          ...(!!renderMark && { renderMark }),
-          ...(!!renderNode && { renderNode }),
-        }
+        ...(!!renderMark && { renderMark }),
+        ...(!!renderNode && { renderNode }),
+      }
       : undefined;
   }
 

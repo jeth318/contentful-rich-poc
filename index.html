@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rich text poc</title>
-  </head>
 
-  <body>
-    <script type="module" src="./build/out.js"></script>
-    <h2>Raw without options</h2>
-    <rich-text
-      json='{"nodeType":"rich-text-document","content":[{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 100/100:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån,därefter ord pris 499 kr/mån. Du sparar 1 540 kr på tjänsten, totalt 2 539 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 250/250:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån, därefter ord pris 549 kr/mån. Du sparar 2 140 kr på tjänsten, totalt 2 179 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 500/500:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 699 kr/mån. Du sparar 2 400 kr på tjänsten, totalt 3 399 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 1000/1000:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 999 kr/mån. Du sparar 6 000 kr på tjänsten, totalt 6 999 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"\nWifi-router ingår (värde 999 kr). Startavgift: 399 kr.\n","marks":[]},{"nodeType":"text","value":"Erbjudandena gäller t.o.m. 20 november 2022 vid nytecknande av bredband.","marks":[{"type":"italic"}]}]}]}'
-    ></rich-text>
-    <hr />
-    <br />
-    <h2>With custom paragraph node and bold mark</h2>
-    <rich-text
-      json='{"nodeType":"rich-text-document","content":[{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 100/100:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån,därefter ord pris 499 kr/mån. Du sparar 1 540 kr på tjänsten, totalt 2 539 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 250/250:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån, därefter ord pris 549 kr/mån. Du sparar 2 140 kr på tjänsten, totalt 2 179 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 500/500:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 699 kr/mån. Du sparar 2 400 kr på tjänsten, totalt 3 399 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 1000/1000:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 999 kr/mån. Du sparar 6 000 kr på tjänsten, totalt 6 999 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"\nWifi-router ingår (värde 999 kr). Startavgift: 399 kr.\n","marks":[]},{"nodeType":"text","value":"Erbjudandena gäller t.o.m. 20 november 2022 vid nytecknande av bredband.","marks":[{"type":"italic"}]}]}]}'
-      options='[{"node":"paragraph","tag":"p","variant":"test-preamble-200","classNames":["funny-font green"]},{"mark":"bold","tag":"strong","classNames":["orange"]}]'
-    ></rich-text>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rich text poc</title>
+  <style>
+    .green {
+      color: green;
+    }
+
+    .orange {
+      color: orange;
+    }
+
+    .magenta {
+      color: magenta;
+    }
+
+    .large-font {
+      font-size: 23px;
+    }
+
+    .funny-font {
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module" src="./build/out.js"></script>
+  <h2>Raw without options</h2>
+  <rich-text
+    json='{"nodeType":"rich-text-document","content":[{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 100/100:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån,därefter ord pris 499 kr/mån. Du sparar 1 540 kr på tjänsten, totalt 2 539 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 250/250:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån, därefter ord pris 549 kr/mån. Du sparar 2 140 kr på tjänsten, totalt 2 179 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 500/500:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 699 kr/mån. Du sparar 2 400 kr på tjänsten, totalt 3 399 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 1000/1000:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 999 kr/mån. Du sparar 6 000 kr på tjänsten, totalt 6 999 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"\nWifi-router ingår (värde 999 kr). Startavgift: 399 kr.\n","marks":[]},{"nodeType":"text","value":"Erbjudandena gäller t.o.m. 20 november 2022 vid nytecknande av bredband.","marks":[{"type":"italic"}]}]}]}'>
+  </rich-text>
+  <hr />
+  <br />
+  <h2>With custom paragraph, bold and italic</h2>
+  <rich-text
+    json='{"nodeType":"rich-text-document","content":[{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 100/100:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån,därefter ord pris 499 kr/mån. Du sparar 1 540 kr på tjänsten, totalt 2 539 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 250/250:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 349 kr/mån i 12 mån, därefter ord pris 549 kr/mån. Du sparar 2 140 kr på tjänsten, totalt 2 179 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 500/500:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 699 kr/mån. Du sparar 2 400 kr på tjänsten, totalt 3 399 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"Bredband via fiber 1000/1000:","marks":[{"type":"bold"}]},{"nodeType":"text","value":" 499 kr/mån i 12 mån, därefter ord pris 999 kr/mån. Du sparar 6 000 kr på tjänsten, totalt 6 999 kr (inkl wifi-router).","marks":[]}]},{"nodeType":"paragraph","content":[{"nodeType":"text","value":"\nWifi-router ingår (värde 999 kr). Startavgift: 399 kr.\n","marks":[]},{"nodeType":"text","value":"Erbjudandena gäller t.o.m. 20 november 2022 vid nytecknande av bredband.","marks":[{"type":"italic"}]}]}]}'
+    options='{"customMarks":[{"mark":"bold","tag":"strong","classNames":["orange"]},{"mark":"italic","tag":"i","classNames":["magenta large-font"]}],"customNodes":[{"node":"paragraph","tag":"p","variant":"test-preamble-200","classNames":["funny-font green"]}]}'>
+  </rich-text>
+
+</body>
+
 </html>
